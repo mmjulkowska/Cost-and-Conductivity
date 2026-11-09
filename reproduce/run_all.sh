@@ -19,7 +19,7 @@ for s in $STAGES; do case $s in
   1) run $PY "$HERE/1_granar/make_granar_inputs.py"; run Rscript "$HERE/1_granar/build_anatomies.R" ;;
   2) run $PY "$HERE/2_mecha/batch.py"; run $PY "$HERE/2_mecha/analyse.py" ;;
   3) run $PY "$HERE/3_rootslice/make_configs.py"; run bash "$HERE/3_rootslice/run_rootslice.sh"
-     run $PY "$HERE/3_rootslice/make_configs_smallstele.py"; run bash "$HERE/3_rootslice/run_small_stele.sh" ;;
+     run $PY "$HERE/3_rootslice/make_configs_smallstele.py"; run bash "$HERE/3_rootslice/run_small_stele.sh"; run $PY "$HERE/3_rootslice/plot_volumes.py" ;;
   4) run $PY "$HERE/4_costs/rep_costs.py"; run $PY "$HERE/4_costs/rep_stats.py"; run $PY "$HERE/4_costs/fig_rep.py"
      if ls "$OUTD/mecha/sensitivity_mc/mc_rep_x2.csv" >/dev/null 2>&1; then run $PY "$HERE/2_mecha/sensitivity_mc/analyse_mc.py"; run $PY "$HERE/2_mecha/sensitivity_mc/fig_mc.py"
      else echo "   (no Monte Carlo results: the Arjun table is built without the kr uncertainty sheet; run stage 7 or copy them from Box)"; fi

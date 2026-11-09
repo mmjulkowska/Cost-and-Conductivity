@@ -32,7 +32,13 @@ Template `template_rootslice.xml`: no aerenchyma (RCA 0), cell length 100 µm, a
 - The stele interior does not enter the cortical volumes: four controls (`CTRL_`) that ran with both templates gave identical cortical volumes.
 - 13 replicates were recovered this way and 6 failed every variant (MP34_cell2, MP57_cell1–3, MP59_cell1, MP66_cell2). Records: `outputs/rootslice/smallstele_variant_used.txt` and `volume_analysis_smallstele.csv`.
 
+## Plots
+The RootSlice build's own R script also writes `bar_*.png`, one bar per run. With about 200 runs on one axis those labels are unreadable. `plot_volumes.py` redraws the same six quantities (cytoplasm %, vacuole %, mitochondria, respiration, N, P per cm³ cortex) into `outputs/rootslice/figures/`:
+- `<metric>_by_segment`: one point per replicate, grouped by segment, with a box plot.
+- `<metric>_replicates`: one labelled horizontal bar per replicate, grouped by segment and coloured by measured cortex cell diameter.
+
 ```
 python 3_rootslice/make_configs.py && bash 3_rootslice/run_rootslice.sh          # ~1.5 h
 python 3_rootslice/make_configs_smallstele.py && bash 3_rootslice/run_small_stele.sh
+python 3_rootslice/plot_volumes.py
 ```
