@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this code, model inputs or results, please cite them as below."
+title: "Cost and Conductivity: anatomy, hydraulic conductivity and construction cost of Solanum pimpinellifolium root segments"
+type: software
+authors:
+  - family-names: Julkowska
+    given-names: Magdalena M.
+    email: mmj55@cornell.edu
+    orcid: "https://orcid.org/0000-0002-4259-8296"
+    affiliation: Boyce Thompson Institute
+  - family-names: Miller
+    given-names: Emily
+    email: esm238@cornell.edu
+    orcid: "https://orcid.org/0009-0007-2451-4355"
+    affiliation: Boyce Thompson Institute
+  - family-names: Nichols
+    given-names: Ruth
+    email: rn382@cornell.edu
+    orcid: "https://orcid.org/0000-0002-1297-2590"
+    affiliation: Boyce Thompson Institute
+repository-code: "https://github.com/mmjulkowska/Cost-and-Conductivity"
+license: MIT
+date-released: 2026-11-09
+version: "v5"
+keywords: [root anatomy, root hydraulics, MECHA, GRANAR, RootSlice, Pareto front, tomato]
+references:
+  - type: article
+    title: "GRANAR, a computational tool to better understand the functional importance of monocotyledon root anatomy"
+    authors: [{family-names: Heymans, given-names: Adrien}]
+    journal: "Plant Physiology"
+    year: 2020
+  - type: article
+    title: "Going with the flow: multiscale insights into the composite nature of water transport in roots"
+    authors: [{family-names: Couvreur, given-names: Valentin}]
+    journal: "Plant Physiology"
+    year: 2018

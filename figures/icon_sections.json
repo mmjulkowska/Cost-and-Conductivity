@@ -1,0 +1,53 @@
+{
+ "note": "Sections used for the figure icons. image = path inside Box 'Cross Sections' folder; centre and radius in pixels of the original photo (0.32127 um/px).",
+ "sections": {
+  "17": {
+   "segment": "MP",
+   "emily_row": 1,
+   "image": "Main Root Cross Sections-Pictures/Main Root Proximal/DSC_0001.JPG",
+   "centre_x_px": 1444,
+   "centre_y_px": 1080,
+   "radius_px": 838.5
+  },
+  "8": {
+   "segment": "MM",
+   "emily_row": 12,
+   "image": "Main Root Cross Sections-Pictures/Main Root Mid/DSC_0003.JPG",
+   "centre_x_px": 1176,
+   "centre_y_px": 1172,
+   "radius_px": 679.3
+  },
+  "0": {
+   "segment": "MT",
+   "emily_row": 21,
+   "image": "Main Root Cross Sections-Pictures/Main Root Tip/DSC_0001.JPG",
+   "centre_x_px": 1245,
+   "centre_y_px": 1185,
+   "radius_px": 657.6
+  },
+  "58": {
+   "segment": "LP",
+   "emily_row": 39,
+   "image": "Lateral Root Cross Sections/Images Used for Analysis/PR/DSC_0003pr (1).JPG",
+   "centre_x_px": 1584,
+   "centre_y_px": 641,
+   "radius_px": 514.9
+  },
+  "47": {
+   "segment": "LM",
+   "emily_row": 45,
+   "image": "Lateral Root Cross Sections/Images Used for Analysis/MR/DSC_0003MR27.JPG",
+   "centre_x_px": 1642,
+   "centre_y_px": 1100,
+   "radius_px": 418.8
+  },
+  "30": {
+   "segment": "LT",
+   "emily_row": 52,
+   "image": "Lateral Root Cross Sections/Images Used for Analysis/RT/DSC_0004RT.JPG",
+   "centre_x_px": 1453,
+   "centre_y_px": 930,
+   "radius_px": 511.0
+  }
+ }
+}

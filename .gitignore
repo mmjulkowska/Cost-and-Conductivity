@@ -1,0 +1,9 @@
+# outputs and downloaded data live on Box, not in git
+outputs/
+reference/
+data/*.xlsx
+data/Cross Sections/
+env/*_log.txt
+__pycache__/
+*.pyc
+.DS_Store
