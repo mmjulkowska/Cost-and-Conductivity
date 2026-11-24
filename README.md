@@ -3,7 +3,7 @@
 Code and model inputs used to compute the radial conductivity, axial conductance and carbon and nitrogen cost of root segments of *Solanum pimpinellifolium*, for a Pareto-front analysis of root system architecture.
 Julkowska Lab, Boyce Thompson Institute.
 
-Each measured cell in each root cross-section photographed by Emily Miller is one **replicate**. Each replicate goes through three models, all built from the same measured sizes:
+Each measured cell in each root cross-section photographed by Emily Miller is one **replicate**. Each replicate goes through three models, all built from the same measured sizes (steps 1–4). Step 5 then uses the segment conductivities to compute whole-root-system conductance (Krs) for every traced seedling of the panel:
 
 | Step | Model | What it gives | Folder |
 |---|---|---|---|
@@ -11,6 +11,7 @@ Each measured cell in each root cross-section photographed by Emily Miller is on
 | 2 | **MECHA** (Python) | radial conductivity kr and axial conductance Kx, with the barrier set for each segment | [`2_mecha/`](2_mecha/README.md) |
 | 3 | **RootSlice** | cortical cell-wall, cytoplasm and vacuole volumes | [`3_rootslice/`](3_rootslice/README.md) |
 | 4 | Python | carbon and nitrogen costs, pairing with conductivity, statistics, table for the Pareto model | [`4_costs/`](4_costs/README.md) |
+| 5 | Python | root-system conductance (Krs) of every traced seedling and day, projection to day 10, heritability, GWAS inputs and server scripts, geography of the salt response | [`5_krs_panel/`](5_krs_panel/README.md) |
 | – | Python | drawings of every GRANAR anatomy, segment galleries, and the figure with half-photo / half-GRANAR cross-sections | [`figures/`](figures/README.md) |
 
 ```
@@ -30,7 +31,7 @@ outputs/mecha/conductivities_per_anatomy.csv (228) ─────────�
                                    outputs/costs/replicate_level_costs_conductivity.csv (207 paired)
                                                              │ 4_costs/build_xlsx.py
                                                              ▼
-                                   outputs/deliverables/Root_costs_conductivity_for_Arjun_v5_Nov2026.xlsx
+                                   outputs/deliverables/20261109_Root_costs_conductivity_for_Arjun_v5.xlsx
 ```
 
 ## Numbers at each step
@@ -46,9 +47,21 @@ outputs/mecha/conductivities_per_anatomy.csv (228) ─────────�
 
 Segments (sheet row → segment): MP 1–9, MM 10–20, MT 21–26, LP 27–40, LM 41–50, LT 51–67. Positions are 3 cm apart along the main root (MP, MM, MT, tip) and a lateral root (LP, LM, LT).
 
+## Step 5 in numbers
+
+| What | n |
+|---|---|
+| Traced plant-days (PimpiBig1–6, control and 100 mM NaCl, tracing days 1–5) | 5,037 |
+| Plants on day 5 / accessions | 1,562 / 240 |
+| Accessions traced and genotyped (GWAS) | 232 |
+| Plants projected to day 10 (two lateral-growth rules) / hindcast check | 1,573 / 760 |
+
+Day-5 median Krs is 8.5 (control) and 4.1 (salt) × 10⁻⁴ cm³ hPa⁻¹ d⁻¹, with accession-mean H² 0.72–0.76. The GWAS found no significant locus; the salt-response traits follow genetic structure and geography (Ecuadorian accessions lose more Krs under salt). Details in [`5_krs_panel/README.md`](5_krs_panel/README.md).
+
 ## What is where
 
 - **In this repository:** all code; the model inputs derived from the sheet (GRANAR parameter files, RootSlice configs, `v5_replicates.csv`); READMEs.
+- **Step 5 inputs** (tracing tables, genotype sample key, collection-site coordinates) go in `data/krs/` (git-ignored); sources are listed in [`5_krs_panel/README.md`](5_krs_panel/README.md). The archived GWAS results are described in [`5_krs_panel/gwas/README.md`](5_krs_panel/gwas/README.md).
 - **On Box:** raw data, model outputs, raw RootSlice runs, the frozen reference and the deliverable table. Links are in [`data/README.md`](data/README.md).
 - **Paths:** set once in [`paths.py`](paths.py). Downloaded data goes in `data/`, outputs are written to `outputs/`. Both can be moved with the environment variables `COSTCOND_DATA`, `COSTCOND_OUT` and `ROOTSLICE_HOME`.
 
@@ -61,6 +74,7 @@ Segments (sheet row → segment): MP 1–9, MM 10–20, MT 21–26, LP 27–40, 
 | GRANAP | GRANAP-dev @ 248adca |
 | Python | 3.12, conda env `mecha_dev` (numpy, scipy, pandas, statsmodels, openpyxl, matplotlib, scikit-image, pillow) |
 | RootSlice | Jagdeep Sidhu's Apple Silicon build (`RootSlice_for_Ruth.zip`, on Box) with its `RootSlice_volume_analysis.R` |
+| Step 5 | Python with numpy, scipy, pandas, statsmodels, matplotlib, openpyxl; `basemap` for the map. GWAS on the server: EMMAX (`emmax-intel64`), PLINK 1.90b6.21, R |
 
 Install: `bash env/install_mecha_mac.sh` and `bash env/setup_rootslice_mac.sh /path/to/RootSlice_for_Ruth.zip`.
 
@@ -69,6 +83,7 @@ Install: `bash env/install_mecha_mac.sh` and `bash env/setup_rootslice_mac.sh /p
 ```
 conda activate mecha_dev
 bash reproduce/run_all.sh                  # stages 1–6 and 8, about 2 h (RootSlice is most of it)
+bash 5_krs_panel/run_all.sh                # step 5, about 25 min (NBOOT=20 for a quick check); needs outputs/mecha/ and data/krs/
 ```
 Stage 8 compares every output table with the frozen reference from Box (`COSTCOND_REF=/path/to/reference`). A rerun from this repository reproduced all 41 reference tables to within 2 × 10⁻¹⁰ relative difference (9 Nov 2026).
 
@@ -77,9 +92,10 @@ Stage 8 compares every output table with the frozen reference from Box (`COSTCON
 - **Barriers come from toluidine-blue brightfield images,** which cannot resolve a Casparian strip. In the laterals (LP, LM) the endodermal barrier is "not detected", not "absent". `2_mecha/checks/` shows that adding one halves lateral kr.
 - **Xylem is GRANAR's single central metaxylem,** but tomato is diarch. Kx depends on this choice.
 - **The true-tip conductivity (MT0) uses the MT anatomy with mature xylem,** so its Kx is an upper bound.
+- **Step 5 uses the control anatomy for salt-grown plants,** so its salt effects on Krs are architectural only; see [`5_krs_panel/README.md`](5_krs_panel/README.md) for the projection and GWAS caveats.
 
 ## Citation and licence
 
-Please cite this repository (see [`CITATION.cff`](CITATION.cff)) and the models it uses: GRANAR (Heymans et al. 2020, *Plant Physiology*), MECHA (Couvreur et al. 2018, *Plant Physiology*) and RootSlice (Sidhu et al. 2023).
+Please cite this repository (see [`CITATION.cff`](CITATION.cff)) and the models it uses: GRANAR (Heymans et al. 2020, *Plant Physiology*), MECHA (Couvreur et al. 2018, *Plant Physiology*) and RootSlice (Sidhu et al. 2023); for step 5, the root hydraulic network of Doussan et al. (1998, *Annals of Botany*) and EMMAX (Kang et al. 2010, *Nature Genetics*).
 - **Code:** MIT licence ([`LICENSE`](LICENSE)).
 - **Data, model inputs, outputs, figures and documentation:** CC BY 4.0 ([`LICENSE-data.md`](LICENSE-data.md)). Reuse requires attribution.
