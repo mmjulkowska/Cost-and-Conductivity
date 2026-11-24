@@ -28,7 +28,7 @@ Building C by section, ng C mm⁻¹ (Tukey group): MP 5540 (a), MM 2723 (b), MT 
 Within sections, building C vs kr gives r_rm = −0.58; building C vs Kx is about 0. `fig_rep.py` plots the figure, written to `Fig_cost_vs_conductivity_replicates*`.
 
 ## `build_xlsx.py`
-Writes `outputs/deliverables/Root_costs_conductivity_for_Arjun_v5_Nov2026.xlsx` (segment means, replicates, statistics, notes). If the Monte Carlo results are present in `outputs/mecha/sensitivity_mc/`, it also adds a "kr uncertainty" sheet.
+Writes `outputs/deliverables/20261109_Root_costs_conductivity_for_Arjun_v5.xlsx` (segment means, replicates, statistics, notes). If the Monte Carlo results are present in `outputs/mecha/sensitivity_mc/`, it also adds a "kr uncertainty" sheet.
 
 ```
 python 4_costs/rep_costs.py && python 4_costs/rep_stats.py && python 4_costs/fig_rep.py && python 4_costs/build_xlsx.py

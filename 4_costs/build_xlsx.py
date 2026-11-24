@@ -2,6 +2,9 @@
 import os, sys; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 from paths import *
 os.chdir(COSTS)  # cost tables live in <outputs>/costs/
+import datetime as _dt
+ISSUED = _dt.date(2026, 11, 9)   # date this version is issued; change it (and the version) when re-issuing
+XLSX = f'{ISSUED:%Y%m%d}_Root_costs_conductivity_for_Arjun_v5.xlsx'
 import pandas as pd, numpy as np
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
@@ -101,7 +104,7 @@ for k,t in enumerate(["Mixed model: log10(conductivity) ~ log10(cost) + (1 | cro
 # ---------------- Notes ----------------
 N=wb.create_sheet('Notes')
 lines=[('Notes, sources and versions',FT),('',F),
- ('Version v5, prepared 7 Nov 2026 for Arjun Chandrasekhar (Pareto-front root architecture model) — Julkowska lab, BTI.',F),
+ (f'Version v5, issued {ISSUED:%d %b %Y} (file {XLSX}) for Arjun Chandrasekhar (Pareto-front root architecture model) — Julkowska lab, BTI. Model runs frozen 7 Nov 2026; replaces the 6 Nov 2026 table.',F),
  ('Anatomy data: Emily Miller, root cross-sections of S. pimpinellifolium (pixel areas × 1.032e-7 mm² per px, from her 0.1 mm stage micrometer). v5 uses every usable section of her sheet (55 sections; rows 4 torn and 60 no stele excluded). Replicate k = her cell #k for cortex, endodermis, epidermis and vasculature (segment median where missing); stele from her vasculature area; pericycle 21 µm.',F),
  ('Segments: positions 3 cm apart along each root (main: MP–MM–MT–apex; lateral: LP–LM–apex). MT0 = main root apex, modelled with the MT anatomy and no barriers.',F),
  ('Barriers (Magda Julkowska, 6 Nov 2026, from Emily Miller\'s staining): main proximal/middle endodermal lignin + exodermal suberin & lignin (B6); main tip zone endodermal lignin only (B1); lateral proximal/middle exodermal suberin & lignin (B10); main and lateral apex none (all barrier walls set to primary-wall kw, after V. Couvreur).',F),
@@ -128,4 +131,4 @@ if _os.path.exists(os.path.join(MC, 'mc_segment_means.csv')):
                           'Not robust: MT (endodermal barrier, B1) vs LP/LM (exodermal barrier, B10) - their order depends on the aquaporin vs plasmodesmata balance (MT above LP/LM in 45% of draws).',
                           'Details: outputs/mecha/sensitivity_mc/ (Fig_kr_sensitivity_MC_withLegend); code in 2_mecha/sensitivity_mc/.']):
         U.cell(14+k,1,t).font=FN
-wb.save(os.path.join(DELIV, 'Root_costs_conductivity_for_Arjun_v5_Nov2026.xlsx')); print('saved', last-r0+1,'replicate rows')
+wb.save(os.path.join(DELIV, XLSX)); print('saved', last-r0+1,'replicate rows')

@@ -22,7 +22,7 @@ Box project folder: Plant.Architecture.Lab › Magda › NSF Math Bio - ParetoFr
 |---|---|
 | Model outputs (contents of `outputs/`: anatomies, conductivities, statistics, costs, figures, Monte Carlo) | Plant.Architecture.Lab › Magda › NSF Math Bio - ParetoFront › 20261109_GRANAR_MECHA_RootSlice › outputs › `Cost-and-Conductivity_outputs_20261109.zip` |
 | Raw RootSlice run folders of the reference run: folder `RootSlice_raw_runs_v5_20261109/` with one .tgz per run (`results_configs_v5rep_v5/`, 216; `results_v5rep_smallstele/`, 17) plus the collected volume_analysis.csv; a rerun from this repository writes `results_costcond_v5*` | Plant.Architecture.Lab › Magda › NSF Math Bio - ParetoFront › 20261109_GRANAR_MECHA_RootSlice › outputs › `RootSlice_raw_runs_v5_20261109/` |
-| Deliverable sent to the Pareto model (`Root_costs_conductivity_for_Arjun_v5_Nov2026.xlsx`) | Plant.Architecture.Lab › Magda › NSF Math Bio - ParetoFront › 20261109_GRANAR_MECHA_RootSlice › outputs › `Cost-and-Conductivity_outputs_20261109.zip` › `outputs/deliverables/` |
+| Deliverable sent to the Pareto model (`20261109_Root_costs_conductivity_for_Arjun_v5.xlsx`) | Plant.Architecture.Lab › Magda › NSF Math Bio - ParetoFront › 20261109_GRANAR_MECHA_RootSlice › outputs › `Cost-and-Conductivity_outputs_20261109.zip` › `outputs/deliverables/` |
 | Frozen reference results, for `reproduce/compare_to_reference.py` (set `COSTCOND_REF` to the downloaded folder) | Plant.Architecture.Lab › Magda › NSF Math Bio - ParetoFront › 20261109_GRANAR_MECHA_RootSlice › outputs › `Cost-and-Conductivity_outputs_20261109.zip` (unzip; the `outputs/` folder inside is the reference) |
 
 The data on Box are shared under CC BY 4.0 (see `../LICENSE-data.md`). Please cite this repository when you reuse them.
