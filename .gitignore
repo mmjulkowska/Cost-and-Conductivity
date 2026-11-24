@@ -7,3 +7,6 @@ env/*_log.txt
 __pycache__/
 *.pyc
 .DS_Store
+
+# step 5 inputs (tracings, sample keys, GPS) live outside git
+data/krs/
